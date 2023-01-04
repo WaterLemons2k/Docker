@@ -1,0 +1,43 @@
+name: Docker
+
+on:
+  schedule:
+    - cron: '0 0 1 */6 *'
+    
+  push:
+    paths:
+      - '.github/workflows/docker.yml'
+
+env:
+  IMAGE: "ddns-go go-qrcode minecraft-bedrock-server open-vm-tools padavan ttnode"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Generate README.md
+        run: |
+          echo "# [Docker](https://hub.docker.com/u/waterlemons2k)" > README.md
+          for i in $IMAGE; do
+            if [ $i != "padavan" ]; then
+              echo "- [$i](../../../Docker-$i)" >> README.md
+            else
+              echo "- [$i](../../../$i)" >> README.md
+            fi
+          done
+          echo "DIFF=$(git diff | grep "+-" | awk -F"[][]" '{print $2}')" >> $GITHUB_ENV
+          
+      - name: Git
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "feat: add ${{ env.DIFF }}"
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+
+      - name: Pull Docker Images
+        run: |
+          for i in $IMAGE; do
+            docker pull -a waterlemons2k/$i
+          done
