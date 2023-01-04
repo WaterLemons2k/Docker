@@ -1,0 +1,22 @@
+name: Pull
+
+on:
+  schedule:
+    - cron: '0 0 1 */6 *'
+    
+  push:
+    paths:
+      - '.github/workflows/pull.yml'
+
+env:
+  IMAGE: "ddns-go go-qrcode minecraft-bedrock-server open-vm-tools padavan ttnode"
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull Docker Images
+        run: |
+          for i in $IMAGE; do
+            docker pull -a waterlemons2k/$i
+          done
