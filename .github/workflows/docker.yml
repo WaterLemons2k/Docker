@@ -20,6 +20,7 @@ jobs:
         
       - name: Generate README.md
         run: |
+          set -x
           echo "# [Docker](https://hub.docker.com/u/waterlemons2k)" > README.md
           for i in $IMAGE; do
             docker pull -a waterlemons2k/$i
