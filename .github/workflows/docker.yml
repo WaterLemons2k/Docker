@@ -37,9 +37,3 @@ jobs:
         with:
           commit_message: "docs: add Image ${{ env.DIFF }}"
           commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-
-      - name: Pull Docker Images
-        run: |
-          for i in $IMAGE; do
-            
-          done
