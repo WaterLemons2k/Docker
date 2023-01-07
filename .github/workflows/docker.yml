@@ -20,7 +20,6 @@ jobs:
         
       - name: Generate README.md
         run: |
-          set -x
           echo "# [Docker](https://hub.docker.com/u/waterlemons2k)" > README.md
           for i in $IMAGE; do
             docker pull -a waterlemons2k/$i
@@ -31,7 +30,7 @@ jobs:
             fi
             docker pull -a waterlemons2k/$i
           done
-          echo "DIFF=$(git diff | grep "+-" | awk -F"[][]" '{print $2}')" >> $GITHUB_ENV
+          echo DIFF=$(git diff | grep "+-" | awk -F"[][]" '{print $2}') >> $GITHUB_ENV
           
       - name: Git
         uses: stefanzweifel/git-auto-commit-action@v4
