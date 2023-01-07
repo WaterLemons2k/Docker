@@ -8,6 +8,9 @@ on:
     paths:
       - '.github/workflows/docker.yml'
 
+env:
+  IMAGE: "ddns-go go-qrcode hello-world minecraft-bedrock-server open-vm-tools padavan test ttnode"
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -18,13 +21,14 @@ jobs:
       - name: Generate README.md
         run: |
           echo "# [Docker](https://hub.docker.com/u/waterlemons2k)" > README.md
-          for i in ddns-go go-qrcode hello-world minecraft-bedrock-server open-vm-tools padavan test ttnode; do
+          for i in $IMAGE; do
             docker pull -a waterlemons2k/$i
-            if [ $i = "padavan" ] || [ $i = "test" ]; then
+            if [[ "$i" == "padavan" || "$i" == "test" ]]; then
               echo "- [$i](../../../$i)" >> README.md
             else
               echo "- [$i](../../../Docker-$i)" >> README.md
             fi
+            docker pull -a waterlemons2k/$i
           done
           echo "DIFF=$(git diff | grep "+-" | awk -F"[][]" '{print $2}')" >> $GITHUB_ENV
           
@@ -33,3 +37,9 @@ jobs:
         with:
           commit_message: "docs: add Image ${{ env.DIFF }}"
           commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+
+      - name: Pull Docker Images
+        run: |
+          for i in $IMAGE; do
+            
+          done
