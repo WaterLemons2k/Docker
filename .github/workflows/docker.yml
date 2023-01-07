@@ -9,7 +9,7 @@ on:
       - '.github/workflows/docker.yml'
 
 env:
-  IMAGE: "ddns-go go-qrcode minecraft-bedrock-server open-vm-tools padavan ttnode"
+  IMAGE: "ddns-go go-qrcode hello-world minecraft-bedrock-server open-vm-tools padavan test ttnode"
 
 jobs:
   docker:
@@ -22,10 +22,10 @@ jobs:
         run: |
           echo "# [Docker](https://hub.docker.com/u/waterlemons2k)" > README.md
           for i in $IMAGE; do
-            if [ $i != "padavan" ]; then
-              echo "- [$i](../../../Docker-$i)" >> README.md
-            else
+            if [ "$i" = "padavan" ] || [ "$i" = "test" ]; then
               echo "- [$i](../../../$i)" >> README.md
+            else
+              echo "- [$i](../../../Docker-$i)" >> README.md
             fi
           done
           echo "DIFF=$(git diff | grep "+-" | awk -F"[][]" '{print $2}')" >> $GITHUB_ENV
@@ -33,7 +33,7 @@ jobs:
       - name: Git
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "feat: add ${{ env.DIFF }}"
+          commit_message: "docs: add Image ${{ env.DIFF }}"
           commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
 
       - name: Pull Docker Images
