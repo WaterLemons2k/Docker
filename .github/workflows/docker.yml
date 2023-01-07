@@ -22,7 +22,7 @@ jobs:
         run: |
           echo "# [Docker](https://hub.docker.com/u/waterlemons2k)" > README.md
           for i in $IMAGE; do
-            if [ "$i" = "padavan" ] || [ "$i" = "test" ]; then
+            if [ $i = "padavan" ] || [ $i = "test" ]; then
               echo "- [$i](../../../$i)" >> README.md
             else
               echo "- [$i](../../../Docker-$i)" >> README.md
