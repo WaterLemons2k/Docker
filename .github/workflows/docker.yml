@@ -21,7 +21,7 @@ jobs:
       - name: Generate README.md
         run: |
           echo "# [Docker](https://hub.docker.com/u/waterlemons2k)" > README.md
-          for i in $IMAGE; do
+          for i in ${{ env.IMAGE }}; do
             if [ $i = "padavan" ] || [ $i = "test" ]; then
               echo "- [$i](../../../$i)" >> README.md
             else
@@ -38,6 +38,6 @@ jobs:
 
       - name: Pull Docker Images
         run: |
-          for i in $IMAGE; do
+          for i in ${{ env.IMAGE }}; do
             docker pull -a waterlemons2k/$i
           done
