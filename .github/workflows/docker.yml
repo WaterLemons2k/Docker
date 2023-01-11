@@ -9,7 +9,7 @@ on:
       - '.github/workflows/docker.yml'
 
 env:
-  IMAGE: "ddns-go go-qrcode hello-world minecraft-bedrock-server open-vm-tools padavan test ttnode"
+  IMAGE: "buildroot ddns-go go-qrcode hello-world minecraft-bedrock-server open-vm-tools padavan test ttnode"
 
 jobs:
   docker:
@@ -35,5 +35,5 @@ jobs:
       - name: Git
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "docs: add Image ${{ env.DIFF }}"
+          commit_message: "docs: add Docker Image ${{ env.DIFF }}"
           commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
