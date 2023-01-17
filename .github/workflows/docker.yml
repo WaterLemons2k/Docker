@@ -9,7 +9,7 @@ on:
       - '.github/workflows/docker.yml'
 
 env:
-  IMAGE: "buildroot ddns-go go-qrcode hello-world minecraft-bedrock-server open-vm-tools padavan test ttnode"
+  IMAGE: "buildroot ddns-go go-qrcode hello-world libqrencode minecraft-bedrock-server open-vm-tools padavan test ttnode"
 
 jobs:
   docker:
