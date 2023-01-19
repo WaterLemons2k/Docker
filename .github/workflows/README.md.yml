@@ -1,17 +1,17 @@
-name: Generate README.md
+name: README.md
 
 on:
   schedule:
     - cron: '0 0 1 */6 *'
   push:
     paths:
-      - '.github/workflows/docker.yml'
+      - '.github/workflows/README.md.yml'
 
 env:
   IMAGE: "buildroot ddns-go go-qrcode hello-world libqrencode minecraft-bedrock-server open-vm-tools padavan ttnode"
 
 jobs:
-  README:
+  README_md:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
