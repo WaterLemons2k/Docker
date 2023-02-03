@@ -17,6 +17,14 @@ on:
       tags:
         required: true
         type: string
+#peter-evans/dockerhub-description
+      description:
+        default: false
+        required: false
+        type: boolean
+      description-repository:
+        required: false
+        type: string
 
     secrets:
       TOKEN:
@@ -50,3 +58,11 @@ jobs:
           platforms: ${{ inputs.platforms }}
           push: ${{ inputs.push }}
           tags: ${{ inputs.tags }}
+
+      - name: Docker Hub Description
+        if: ${{ inputs.description == 'true' && inputs.description-repository != '' }}
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: waterlemons2k
+          password: ${{ secrets.TOKEN }}
+          repository: ${{ inputs.description-repository }}
