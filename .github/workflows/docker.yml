@@ -18,10 +18,6 @@ on:
         required: true
         type: string
 #peter-evans/dockerhub-description
-      description:
-        default: false
-        required: false
-        type: boolean
       description-repository:
         required: false
         type: string
@@ -60,7 +56,7 @@ jobs:
           tags: ${{ inputs.tags }}
 
       - name: Docker Hub Description
-        if: ${{ inputs.description && inputs.description-repository != '' }}
+        if: inputs.description-repository != ''
         uses: peter-evans/dockerhub-description@v3
         with:
           username: waterlemons2k
