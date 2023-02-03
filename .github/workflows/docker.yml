@@ -60,7 +60,7 @@ jobs:
           tags: ${{ inputs.tags }}
 
       - name: Docker Hub Description
-        if: ${{ inputs.description == 'true' && inputs.description-repository }}
+        if: ${{ inputs.description == 'true' && inputs.description-repository == true}}
         uses: peter-evans/dockerhub-description@v3
         with:
           username: waterlemons2k
