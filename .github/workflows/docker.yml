@@ -54,7 +54,6 @@ jobs:
           platforms: ${{ inputs.platforms }}
           push: ${{ inputs.push }}
           tags: ${{ inputs.tags }}
-          labels: ${{ inputs.labels }}
 
       - name: Docker Hub Description
         if: inputs.description-repository != ''
