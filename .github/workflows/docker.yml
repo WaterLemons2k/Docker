@@ -17,6 +17,13 @@ on:
       tags:
         required: true
         type: string
+      labels:
+        required: false
+        type: string
+#docker/metadata-action
+      meta-images:
+        required: false
+        type: string
 #peter-evans/dockerhub-description
       description-repository:
         required: false
@@ -32,6 +39,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        
+      - name: Docker Meta
+        if: inputs.meta-images != ''
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ inputs.meta-images }}
 
       - name: Set up QEMU
         if: inputs.platforms != ''
@@ -54,6 +68,7 @@ jobs:
           platforms: ${{ inputs.platforms }}
           push: ${{ inputs.push }}
           tags: ${{ inputs.tags }}
+          labels: ${{ inputs.labels }}
 
       - name: Docker Hub Description
         if: inputs.description-repository != ''
