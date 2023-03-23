@@ -23,16 +23,15 @@ jobs:
           for i in $IMAGE; do
             docker pull -a waterlemons2k/$i
             case $i in
-              padavan|test)
+              test)
                 echo "- [$i](../../../$i)" >> README.md;;
               *)
                 echo "- [$i](../../../Docker-$i)" >> README.md;;
             esac
           done
-          echo DIFF=$(git diff | grep "+-" | awk -F"[][]" '{print $2}') >> $GITHUB_ENV
           
       - name: Git
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "docs: add Docker Image ${{ env.DIFF }}"
+          commit_message: "docs: sync Docker Image"
           commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
