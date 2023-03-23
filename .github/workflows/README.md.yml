@@ -8,7 +8,7 @@ on:
       - '.github/workflows/README.md.yml'
 
 env:
-  IMAGE: "buildroot ddns-go go-qrcode hello-world libqrencode minecraft-bedrock-server open-vm-tools padavan ttnode"
+  IMAGE: "buildroot ddns-go go-qrcode hello-world libqrencode minecraft-bedrock-server open-vm-tools ttnode"
 
 jobs:
   README_md:
@@ -22,12 +22,12 @@ jobs:
           echo "# [Docker](https://hub.docker.com/u/waterlemons2k)" > README.md
           for i in $IMAGE; do
             docker pull -a waterlemons2k/$i
-            if [[ "$i" == "padavan" || "$i" == "test" ]]; then
-              echo "- [$i](../../../$i)" >> README.md
-            else
-              echo "- [$i](../../../Docker-$i)" >> README.md
-            fi
-            docker pull -a waterlemons2k/$i
+            case $i in
+              padavan|test)
+                echo "- [$i](../../../$i)" >> README.md;;
+              *)
+                echo "- [$i](../../../Docker-$i)" >> README.md;;
+            esac
           done
           echo DIFF=$(git diff | grep "+-" | awk -F"[][]" '{print $2}') >> $GITHUB_ENV
           
