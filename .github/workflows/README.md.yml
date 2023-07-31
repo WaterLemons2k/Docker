@@ -11,6 +11,10 @@ env:
   IMAGE: "buildroot ddns-go go-qrcode hello-world libqrencode minecraft-bedrock-server open-vm-tools ttnode"
 
 jobs:
+  keep-scheduled-workflow-activity:
+    if: github.event_name == 'schedule'
+    uses: WaterLemons2k/scheduled-workflow-activity-action/.github/workflows/reusable.yml@v1
+
   README_md:
     runs-on: ubuntu-latest
     steps:
