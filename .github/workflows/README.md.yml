@@ -8,7 +8,7 @@ on:
       - '.github/workflows/README.md.yml'
 
 env:
-  IMAGE: "buildroot ddns-go go-qrcode hello-world libqrencode minecraft-bedrock-server open-vm-tools ttnode"
+  IMAGE: "buildroot ddns-go go-qrcode hello-world libqrencode minecraft-bedrock-server open-vm-tools ttnode upx"
 
 jobs:
   keep-scheduled-workflow-activity:
@@ -32,15 +32,20 @@ jobs:
       - name: Generate README.md
         if: github.event_name == 'push'
         run: |
-          echo "# [Docker](https://hub.docker.com/u/waterlemons2k)" > README.md
-          for i in ${{ env.IMAGE }}; do
-            case $i in
-              test)
-                echo "- [$i](https://hub.docker.com/r/waterlemons2k/$i) [GitHub](../../../$i)" >> README.md;;
-              *)
-                echo "- [$i](https://hub.docker.com/r/waterlemons2k/$i) [GitHub](../../../Docker-$i)" >> README.md;;
-            esac
-          done
+          {
+            echo '# [Docker](https://hub.docker.com/u/waterlemons2k)'
+            for i in ${{ env.IMAGE }}; do
+              printf '%s' "- [$i](https://hub.docker.com/r/waterlemons2k/$i) [:octocat:](../../../"
+              case $i in
+                test)
+                  echo "$i)";;
+                upx)
+                  echo "$i-docker)";;
+                *)
+                  echo "Docker-$i)";;
+              esac
+            done
+          } >README.md
 
       - name: Git
         if: github.event_name == 'push'
