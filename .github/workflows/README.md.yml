@@ -22,7 +22,7 @@ jobs:
         if: github.event_name == 'schedule'
         run: |
           for i in ${{ env.IMAGE }}; do
-            docker pull -a waterlemons2k/$i
+            docker pull waterlemons2k/$i
           done
 
       - name: Checkout
