@@ -64,7 +64,7 @@ jobs:
 
       - name: Docker Hub Description
         if: inputs.description-repository != ''
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@v5
         with:
           username: waterlemons2k
           password: ${{ secrets.TOKEN }}
