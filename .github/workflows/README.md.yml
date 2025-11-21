@@ -27,7 +27,7 @@ jobs:
 
       - name: Checkout
         if: github.event_name == 'push'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Generate README.md
         if: github.event_name == 'push'
