@@ -13,7 +13,7 @@ env:
 jobs:
   keep-scheduled-workflow-activity:
     if: github.event_name == 'schedule'
-    uses: WaterLemons2k/scheduled-workflow-activity-action/.github/workflows/reusable.yml@v1
+    uses: WaterLemons2k/scheduled-workflow-activity-action/.github/workflows/reusable.yml@v2
 
   README_md:
     runs-on: ubuntu-latest
