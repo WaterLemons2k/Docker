@@ -54,7 +54,7 @@ jobs:
           password: ${{ secrets.TOKEN }}
 
       - name: Build and push Docker Image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           build-args: ${{ inputs.build-args }}
           context: ${{ inputs.context }}
